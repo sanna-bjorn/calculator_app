@@ -1,3 +1,5 @@
+let display = document.querySelector("#display");
+display = 0;
 // add functions for add, subtract, multiply, divide
 
 function add(a, b) {
@@ -38,12 +40,19 @@ function operate(operator, a, b) {
 }
 
 // Create the functions that populate the display when you click the number buttons. You should be storing the ‘display value’ in a variable somewhere for use in the next step.
+
 // So when 1 is clicked event listener catches this and displays 1 and stores it as the first number. Could be a loop that breaks when = is pressed?
 
+// click -> display x ->store x in a variable
+
+function playerChoseOne() {
+  let result = 1;
+  console.log(result);
+  display = display;
+}
+
 function addButtonListener() {
-  document.querySelector("#one").onclick = 1;
-  // document.querySelector("#two").onclick = playerChosePaper;
-  // document.querySelector("#three").onclick = playerChoseScissors;
+  document.querySelector("#one").onclick = playerChoseOne;
 }
 addButtonListener();
 console.log(addButtonListener);

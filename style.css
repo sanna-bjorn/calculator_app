@@ -1,6 +1,6 @@
 .section,
 .container,
-#display,
+.display-container,
 h1 {
   display: flex;
   justify-content: center;
@@ -8,14 +8,12 @@ h1 {
 }
 
 .container {
-  /* height: 75vh;
-  min-height: 200px; */
   padding: 10px;
   margin-top: 15px;
 }
 
 .buttons {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
 }
