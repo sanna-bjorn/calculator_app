@@ -1,0 +1,21 @@
+.section,
+.container,
+#display,
+h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  /* height: 75vh;
+  min-height: 200px; */
+  padding: 10px;
+  margin-top: 15px;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+}
