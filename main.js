@@ -30,12 +30,16 @@ function operate(operator, a, b) {
   switch (operator) {
     case "+":
       return add(a, b);
+      break;
     case "-":
       return subtract(a, b);
+      break;
     case "*":
       return multiply(a, b);
+      break;
     case "/":
       return divide(a, b);
+      break;
   }
 }
 
@@ -45,14 +49,25 @@ function operate(operator, a, b) {
 
 // click -> display x ->store x in a variable
 
-function playerChoseOne() {
-  let result = 1;
-  console.log(result);
-  display = display;
-}
+document.querySelectorAll(".digits").forEach((item) => {
+  item.addEventListener("click", (event) => {
+    updateOperands(item.textContent);
+  });
+});
 
-function addButtonListener() {
-  document.querySelector("#one").onclick = playerChoseOne;
+function updateOperands(value) {
+  if (display.textContent != "") {
+    display.textContent = value;
+  }
 }
-addButtonListener();
-console.log(addButtonListener);
+// function playerChoseOne() {
+//   let result = 1;
+//   console.log(result);
+//   display = display;
+// }
+
+// function addButtonListener() {
+//   document.querySelector("#one").onclick = playerChoseOne;
+// }
+// addButtonListener();
+// console.log(addButtonListener);
