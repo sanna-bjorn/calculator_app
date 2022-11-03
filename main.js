@@ -1,4 +1,7 @@
-let display = document.querySelector("#display");
+let display_container = document.querySelector(".display-container");
+let display = document.createElement("div");
+display.classList.add("display");
+display_container.appendChild(display);
 display = 0;
 console.log(display);
 
@@ -60,6 +63,21 @@ document.querySelectorAll(".digits").forEach((item) => {
 });
 
 function updateOperands(value) {
+  if (display.textContent != "") {
+    display.textContent = value;
+    console.log(value);
+  }
+}
+
+document.querySelectorAll(".operatorBtn").forEach((item) => {
+  item.addEventListener("click", (event) => {
+    updateOperators(item.textContent);
+    console.log(event);
+    console.log(item.textContent);
+  });
+});
+
+function updateOperators(value) {
   if (display.textContent != "") {
     display.textContent = value;
     console.log(value);
