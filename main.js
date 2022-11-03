@@ -1,21 +1,23 @@
 let display = document.querySelector("#display");
 display = 0;
+console.log(display);
+
 // add functions for add, subtract, multiply, divide
 
 function add(a, b) {
   return a + b;
 }
-console.log(add);
+// console.log(add);
 
 function subtract(a, b) {
   return a - b;
 }
-console.log(subtract);
+// console.log(subtract);
 
 function multiply(a, b) {
   return a * b;
 }
-console.log(multiply);
+// console.log(multiply);
 
 function divide(a, b) {
   return a % b;
@@ -52,22 +54,26 @@ function operate(operator, a, b) {
 document.querySelectorAll(".digits").forEach((item) => {
   item.addEventListener("click", (event) => {
     updateOperands(item.textContent);
+    console.log(event);
+    console.log(item.textContent);
   });
 });
 
 function updateOperands(value) {
   if (display.textContent != "") {
     display.textContent = value;
+    console.log(value);
   }
 }
-// function playerChoseOne() {
+
+// function playerChoseOne(value) {
 //   let result = 1;
 //   console.log(result);
-//   display = display;
+//   display = value;
 // }
 
 // function addButtonListener() {
 //   document.querySelector("#one").onclick = playerChoseOne;
 // }
 // addButtonListener();
-// console.log(addButtonListener);
+// console.log(playerChoseOne);
