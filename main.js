@@ -1,9 +1,14 @@
 let display_container = document.querySelector(".display-container");
-let display = document.createElement("div");
-display.classList.add("display");
-display_container.appendChild(display);
-display = 0;
-console.log(display);
+let firstOperand = document.createElement("div");
+firstOperand.classList.add("firstOperand");
+display_container.appendChild(firstOperand);
+firstOperand.textContent;
+console.log(firstOperand);
+let secondOperand = document.createElement("div");
+secondOperand.classList.add("secondOperand");
+display_container.appendChild(secondOperand);
+secondOperand.textContent;
+console.log(secondOperand);
 
 // add functions for add, subtract, multiply, divide
 
@@ -57,21 +62,27 @@ function operate(operator, a, b) {
 document.querySelectorAll(".digits").forEach((item) => {
   item.addEventListener("click", (event) => {
     updateOperands(item.textContent);
-    console.log(event);
     console.log(item.textContent);
   });
 });
 
 function updateOperands(value) {
-  if (display.textContent != "") {
-    display.textContent = value;
-    console.log(value);
+  if (firstOperand.textContent != "") {
+    firstOperand.textContent += value;
+    // firstOperand += value;
+    console.log(firstOperand);
+  } else {
+    secondOperand.textContent += value;
+    // secondOperand += value;
+
+    console.log(secondOperand);
   }
 }
 
 document.querySelectorAll(".operatorBtn").forEach((item) => {
   item.addEventListener("click", (event) => {
     updateOperators(item.textContent);
+
     console.log(event);
     console.log(item.textContent);
   });
@@ -79,8 +90,9 @@ document.querySelectorAll(".operatorBtn").forEach((item) => {
 
 function updateOperators(value) {
   if (display.textContent != "") {
-    display.textContent = value;
+    display.textContent += value;
     console.log(value);
+    console.log(display);
   }
 }
 
