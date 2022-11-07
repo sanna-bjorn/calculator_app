@@ -1,14 +1,16 @@
 let display_container = document.querySelector(".display-container");
-let firstOperand = document.createElement("div");
-firstOperand.classList.add("firstOperand");
-display_container.appendChild(firstOperand);
+let firstOperand = document.getElementById("firstOperand");
 firstOperand.textContent;
 console.log(firstOperand);
-let secondOperand = document.createElement("div");
-secondOperand.classList.add("secondOperand");
-display_container.appendChild(secondOperand);
+let secondOperand = document.getElementById("secondOperand");
 secondOperand.textContent;
 console.log(secondOperand);
+const operatorSpan = document.getElementById("operator");
+
+const calculatorZone = document.getElementById("calculator");
+const displayZone = document.getElementById("display");
+const inputZone = document.getElementById("inputZone");
+const answerZone = document.getElementById("answerZone");
 
 // add functions for add, subtract, multiply, divide
 
@@ -28,27 +30,28 @@ function multiply(a, b) {
 // console.log(multiply);
 
 function divide(a, b) {
-  return a % b;
+  if (b != "0") {
+    return parseFloat(a) / parseFloat(b);
+  } else {
+    alert("Cannot divide by 0");
+  }
+  console.log(divide);
 }
-console.log(divide);
-
 // create a new function operate that takes an operator and 2 numbers and then calls one of the above functions on the numbers.
 
-function operate(operator, a, b) {
-  a = Number(a);
-  b = Number(b);
+function operate(operator, firstArg, secondArg) {
   switch (operator) {
     case "+":
-      return add(a, b);
+      return add(firstArg, secondArg);
       break;
     case "-":
-      return subtract(a, b);
+      return subtract(firstArg, secondArg);
       break;
     case "*":
-      return multiply(a, b);
+      return multiply(firstArg, secondArg);
       break;
     case "/":
-      return divide(a, b);
+      return divide(firstArg, secondArg);
       break;
   }
 }
@@ -57,7 +60,7 @@ function operate(operator, a, b) {
 
 // So when 1 is clicked event listener catches this and displays 1 and stores it as the first number. Could be a loop that breaks when = is pressed?
 
-// click -> display x ->store x in a variable
+//creating a listener for all clicks
 
 document.querySelectorAll(".digits").forEach((item) => {
   item.addEventListener("click", (event) => {
@@ -66,44 +69,94 @@ document.querySelectorAll(".digits").forEach((item) => {
   });
 });
 
+//function to update the operands to use in the calculation
+
 function updateOperands(value) {
-  if (firstOperand.textContent != "") {
+  if (operatorSpan.textContent == "") {
     firstOperand.textContent += value;
-    // firstOperand += value;
-    console.log(firstOperand);
   } else {
     secondOperand.textContent += value;
-    // secondOperand += value;
-
-    console.log(secondOperand);
   }
 }
 
+//event listener to listen to operator buttons
 document.querySelectorAll(".operatorBtn").forEach((item) => {
   item.addEventListener("click", (event) => {
     updateOperators(item.textContent);
-
     console.log(event);
     console.log(item.textContent);
   });
 });
 
 function updateOperators(value) {
-  if (display.textContent != "") {
-    display.textContent += value;
-    console.log(value);
-    console.log(display);
+  if (firstOperand.textContent != "" && secondOperand.textContent == "") {
+    operatorSpan.textContent = value;
+  } else if (
+    firstOperand.textContent != "" &&
+    secondOperand.textContent != ""
+  ) {
+    (firstOperand.textContent = value),
+      (secondOperand.textContent = value),
+      (operatorSpan.textContent = value),
+      (answerZone.textContent = value);
+  }
+
+  //   } else if (
+  //      {
+  //   ) {
+  //     let meanwhile = roundTo5decimalsMax(
+  //       operate(
+  //         operatorSpan.textContent,
+  //         firstOperand.textContent,
+  //         secondOperand.textContent
+  //       )
+  //     );
+  //     firstOperand.textContent = meanwhile;
+  //     answerZone.textContent = meanwhile;
+  //     operatorSpan.textContent = value;
+  //     secondOperand.textContent = "";
+  //   }
+  else if (firstOperand.textContent == "" && answerZone.textContent != "") {
+    firstOperand.textContent = answerZone.textContent;
+    operatorSpan.textContent = value;
   }
 }
 
-// function playerChoseOne(value) {
-//   let result = 1;
-//   console.log(result);
-//   display = value;
-// }
+const eqlBtn = document.getElementById("equals");
 
-// function addButtonListener() {
-//   document.querySelector("#one").onclick = playerChoseOne;
-// }
-// addButtonListener();
-// console.log(playerChoseOne);
+function roundTo5decimalsMax(halfProduct) {
+  halfProduct *= 100000;
+  halfProduct = Math.round(halfProduct);
+  return halfProduct / 100000;
+}
+
+eqlBtn.onclick = function () {
+  if (
+    firstOperand.textContent != "" &&
+    operatorSpan.textContent != "" &&
+    secondOperand.textContent != ""
+  ) {
+    let answer = roundTo5decimalsMax(
+      operate(
+        operatorSpan.textContent,
+        firstOperand.textContent,
+        secondOperand.textContent
+      )
+    );
+    answerZone.textContent = answer;
+    firstOperand.textContent = "";
+    operatorSpan.textContent = "";
+    secondOperand.textContent = "";
+  } else {
+    console.log("You need to input a number?");
+  }
+};
+
+const clearBtn = document.getElementById("clear");
+
+clearBtn.onclick = function () {
+  firstOperand.textContent = "";
+  operatorSpan.textContent = "";
+  secondOperand.textContent = "";
+  answerZone.textContent = "";
+};
